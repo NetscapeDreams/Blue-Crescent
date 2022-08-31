@@ -1,4 +1,5 @@
-# Blue Crescent
+![bc](https://user-images.githubusercontent.com/74492478/187731754-384da0ec-b559-4691-a2fd-35c6e4ee6bc8.png)
+
 Blue Crescent version 0.2, Written by BurningInfern0
 
 Linux hardening script.
