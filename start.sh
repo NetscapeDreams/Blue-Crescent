@@ -1,13 +1,11 @@
 #!/bin/bash
 
-# Essentiality Script, written by BurningInfern0 for use in hardening Linux system environments.
-
 if [[ $1 == "--graphical" ]]; then
   curUser=$(whoami)
   if [[ $curUser != "root" ]]; then
-    zenity --info --title="Essentiality Script" --width="300" --height="100" --text="This script has not been run as root. The script will continue, but please expect errors when running as a non-root user."
+    zenity --info --title="Blue Crescent" --width="300" --height="100" --text="This script has not been run as root. The script will continue, but please expect errors when running as a non-root user."
   fi
-  scriptOptions=$(zenity --list --title="Essentiality Script, Graphical" --text="Please select what you want to do.\n\nEssentiality Script v0.2, Installer script is version 1.1.1.\n\nProgram and scripts written by BurningInfern0." --width="550" --height="410" --checklist --column="Check" --column="Script" --column="Description" --column="Version" \
+  scriptOptions=$(zenity --list --title="Blue Crescent Graphical" --text="Please select what you want to do.\n\nBlue Crescent v0.2, Installer script is version 1.1.1.\n\nProgram and scripts written by BurningInfern0." --width="550" --height="410" --checklist --column="Check" --column="Script" --column="Description" --column="Version" \
     . ForkBombs "Prevents fork bombs." 1.1 \
     . RKHunter "Performs a rootkit scan with RootkitHunter." 1.0 \
     . BPF "Enables the Berkely Packet Finder." 1.0 \
