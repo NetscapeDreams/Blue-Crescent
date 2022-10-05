@@ -12,7 +12,7 @@ Make sure you have `yad`, a fork of zenity, installed.
 ## How to run
 Simply run `./start.sh -g` to start the program. Command line mode is not complete yet and will be done in a later version.
 
-![image](https://user-images.githubusercontent.com/74492478/193976020-5dd389b4-41c8-4d7d-a190-a30ff8824c45.png)
+![image](https://user-images.githubusercontent.com/74492478/193980531-4d9ce5ae-2b88-403e-8ddb-528ac161302e.png)
 
 ### What is the "External" column?
 If a script has something in that column, it means Blue Crescent requires the use of an external program to complete this script fully.
