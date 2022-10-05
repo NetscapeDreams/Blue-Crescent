@@ -1,6 +1,6 @@
 ![bc](https://user-images.githubusercontent.com/74492478/187731754-384da0ec-b559-4691-a2fd-35c6e4ee6bc8.png)
 
-Blue Crescent version 0.2.1, Written by BurningInfern0
+Blue Crescent version 0.2.1 Release Candidate 1, Written by BurningInfern0
 
 Linux hardening script.
 
@@ -11,6 +11,7 @@ Make sure you have `yad`, a fork of zenity, installed.
 
 ## How to run
 Simply run `./start.sh -g` to start the program. Command line mode is not complete yet and will be done in a later version.
+
 ![image](https://user-images.githubusercontent.com/74492478/193976020-5dd389b4-41c8-4d7d-a190-a30ff8824c45.png)
 
 ### What is the "External" column?
