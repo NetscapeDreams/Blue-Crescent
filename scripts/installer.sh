@@ -1,12 +1,19 @@
 #!/bin/bash
 # installer script for installing stuff.
-# version 1.1.1
-# - notifies the user where the file is stored
+# version 1.2
+# - general improvements
+
+if [[ -n "$1" ]]; then
+  echo ""
+else
+  echo -e "Blue Crescent Installer Script v1.2\nusage: ./installer.sh [PACKAGE]\nMust be run as root."
+  exit
+fi
 
 # checks if the current running user is root.
 curUser=$(whoami)
 if [[ $curUser != "root" ]]; then
-  zenity --error --title="Installer Script" --width="200" --height="100" --text="You must run this script as root."
+  yad --title="Installer Script" --width="300" --height="100" --text="You must run this script as root."
   exit 1
 fi
 
@@ -14,22 +21,41 @@ fi
 if [ -e "/root/package-preference" ]; then
   pkgman=$(cat /root/package-preference)
 else
-  pkgman=$(zenity --entry --title="Installer Script" --width="300" --height="100" --text="Please specify your package manager.")
-  echo $pkgman > /root/package-preference
-  zenity --info --title="Installer Script" --width="300" --height="100" --text="The script has noted your package manager, and stored it in /root/package-preference. If you need to change it, please delete, or edit the file."
+  pkgmanOptions=$(yad --list --center --title="Select Package Manager" --text="Please select your package manager.\nIf your package manager is not in this list, you'll have to install it via your package manager manually, or compile it." --width="375" --height="250" --checklist --column="Check" --column="Manager" --column="System"\
+  false yum "Red Hat Enterprise Linux-based" \
+  false dnf "Fedora-based" \
+  false zypper "OpenSUSE-based" \
+  false pacman "Arch Linux-based" \
+  false apt "Debian-based")
+
+  # puts yad items into array
+  IFS="|" read -ra pkgmanItems <<< "$pkgmanOptions"
+
+  echo $pkgmanOptions | cut -d"|" -f2 | tee /root/package-preference
+
+  yad --title="Installer Script" --width="300" --height="100" --text="The script has noted your package manager, and stored it in /root/package-preference. If you need to change it, please delete, or edit the file."
 fi
 
 # installs the package using the given package manager.
 case $pkgman in
+  yum)
+     echo "Installing $1 via yum..."
+     yum -y install $1
+    ;;
+  dnf)
+    echo "Installing $1 via dnf..."
+    dnf install --assumeyes $1
+    ;;
+  zypper)
+    echo "Installing $1 via zypper..."
+    zypper --no-confirmation install $1
+    ;;
   pacman)
-    echo "Installing $1 using pacman..."
+    echo "Installing $1 via pacman..."
     pacman -S --noconfirm $1
     ;;
   apt)
-    echo "Installing $1 using apt..."
+    echo "Installing $1 via apt..."
     apt -y install $1
     ;;
-  *)
-    echo "This package manager is currently not supported, please install the package manually."
-    ;;
-esac
+esac 

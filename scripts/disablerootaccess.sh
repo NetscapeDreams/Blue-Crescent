@@ -11,7 +11,7 @@ sed -i -e "${grepLine}s#/bin/bash#/usr/bin/nologin#" /etc/passwd
 
 exitCode=$(echo $?)
 if [[ $exitCode == "0" ]]; then
-  zenity --info --title="Disable Root Access Script" --text="Access to the root account via tty has been disabled." --width="300" --height="100"
+  yad --info --title="Disable Root Access Script" --text="Access to the root account via tty has been disabled." --width="300" --height="100"
 else
-  zenity --error --title="Disable Root Access Script" --text="An error has occurred. Check the console for details.\n\nExit code $exitCode" --width="200" --height="100"
+  yad --error --title="Disable Root Access Script" --text="An error has occurred. Check the console for details.\n\nExit code $exitCode" --width="200" --height="100"
 fi

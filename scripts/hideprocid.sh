@@ -6,7 +6,7 @@ echo "proc    /proc    proc    defaults,hidepid=2    0 0" >> /etc/fstab
 
 exitCode=$(echo $?)
 if [[ $exitCode == "0" ]]; then
-  zenity --info --title="Hide Process ID Script" --text="This script has completed successfully.\nA restart is required for changes to take effect." --width="300" --height="100"
+  yad --info --title="Hide Process ID Script" --text="This script has completed successfully.\nA restart is required for changes to take effect." --width="300" --height="100"
 else
-  zenity --error --title="Hide Process ID Script" --text="An error has occurred. Check the console for details.\n\nExit code $exitCode" --width="200" --height="100"
+  yad --error --title="Hide Process ID Script" --text="An error has occurred. Check the console for details.\n\nExit code $exitCode" --width="200" --height="100"
 fi

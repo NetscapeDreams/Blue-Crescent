@@ -1,24 +1,27 @@
 #!/bin/bash
 
-if [[ $1 == "--graphical" ]]; then
+if [[ $1 == "-g" ]]; then
   curUser=$(whoami)
   if [[ $curUser != "root" ]]; then
-    zenity --info --title="Blue Crescent" --width="300" --height="100" --text="This script has not been run as root. The script will continue, but please expect errors when running as a non-root user."
+    yad --title="Blue Crescent | Root Warning" --window-icon="bcicon.png" --width=500 --text="This script has not been run as root. Non-root mode should only be used for development or debugging purposes only."
+    if [[ $? == "1" ]]; then
+      exit
+    fi
   fi
-  scriptOptions=$(zenity --list --title="Blue Crescent Graphical" --text="Please select what you want to do.\n\nBlue Crescent v0.2, Installer script is version 1.1.1.\n\nProgram and scripts written by BurningInfern0." --width="550" --height="410" --checklist --column="Check" --column="Script" --column="Description" --column="Version" \
-    . ForkBombs "Prevents fork bombs." 1.1 \
-    . RKHunter "Performs a rootkit scan with RootkitHunter." 1.0 \
-    . BPF "Enables the Berkely Packet Finder." 1.0 \
-    . RandMem "Enables Memory Randomization." 1.0 \
-    . UFW "Enables the Uncomplicated Firewall." 1.0 \
-    . ClamAV "Performs a malware scan with ClamAV." 1.0 \
-    . ICMPEcho "Disables the ICMP Echo Reply function." 1.0 \
-    . DisRoot "Disables root access via tty." 1.0 \
-    . DisSSHRoot "Disables root access via SSH." 1.0 \
-    . DisGuest "Disables the guest account in Debian/Ubuntu systems." 1.0 \
-    . HideProcID "Hides account process IDs via /etc/fstab." 1.0)
+  scriptOptions=$(yad --list --center --window-icon="bcicon.png" --image="bc.png" --image-on-top --title="Blue Crescent Graphical" --text="Please select what you want to do.\n\nBlue Crescent v0.2.1, Installer script is version 1.1.1.\n\nProgram and scripts written by BurningInfern0." --width="700" --height="500" --checklist --column="Check" --column="Script" --column="Description" --column="Version" --column="External" \
+    false ForkBombs "Prevents fork bombs." 1.1 "" \
+    false RKHunter "Performs a rootkit scan with RootkitHunter." 1.0 "rkhunter" \
+    false BPF "Enables the Berkely Packet Finder." 1.0 "" \
+    false RandMem "Enables Memory Randomization." 1.0 "" \
+    false UFW "Enables the Uncomplicated Firewall." 1.0 "ufw" \
+    false ClamAV "Performs a malware scan with ClamAV." 1.0 "clamav" \
+    false ICMPEcho "Disables the ICMP Echo Reply function." 1.0 "" \
+    false DisRoot "Disables root access via tty." 1.0 "" \
+    false DisSSHRoot "Disables root access via SSH." 1.0 "openssh-server" \
+    false DisGuest "Disables the guest account in Debian/Ubuntu systems." 1.0 "" \
+    false HideProcID "Hides account process IDs via /etc/fstab." 1.0 "")
 
-  # puts zenity items into array
+  # puts yad items into array
   IFS="|" read -ra scriptItems <<< "$scriptOptions"
 
   for script in ${scriptItems[@]}; do
@@ -60,8 +63,8 @@ if [[ $1 == "--graphical" ]]; then
   done
   exit 0
   fi
-if [[ $1 == "--command" ]]; then
+if [[ $1 == "-c" ]]; then
   echo "command line mode is currently not complete at this time, please use graphical mode."
   exit 0
 fi
-echo -e "usage: ./start.sh [MODE]\nModes:\n--graphical    enables the graphical interface.\n--command      enables the command interface."
+echo -e "usage: ./start.sh [MODE]\nModes:\n-g    enables the graphical interface.\n-c    enables the command interface."
