@@ -8,7 +8,12 @@ rkhunter 1>/dev/null 2>/dev/null
 exitCode=$(echo $?)
 if [[ $exitCode == 127 ]]; then
   echo "Rootkit Hunter is not installed, please wait while I install it."
-  ../installer.sh rkhunter
+  ./scripts/installer.sh rkhunter
+  exitCode=$(echo $?)
+  if [[ $exitCode != "0" ]]; then
+    echo "An error has occurred with the installation script, we are NOT continuing."
+    exit 1
+  fi
 elif [[ $exitCode == 126 ]]; then
   echo "Rootkit Hunter cannot be accessed."
   exit 1

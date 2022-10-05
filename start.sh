@@ -8,7 +8,7 @@ if [[ $1 == "-g" ]]; then
       exit
     fi
   fi
-  scriptOptions=$(yad --list --center --window-icon="bcicon.png" --image="bc.png" --image-on-top --title="Blue Crescent Graphical" --text="Please select what you want to do.\n\nBlue Crescent v0.2.1-rc1, Installer script is version 1.2.\n\nProgram and scripts written by BurningInfern0." --width="700" --height="500" --checklist --column="Check" --column="Script" --column="Description" --column="Version" --column="External" \
+  scriptOptions=$(yad --list --center --window-icon="bcicon.png" --image="bc.png" --image-on-top --title="Blue Crescent Graphical" --text="Please select what you want to do.\n\nBlue Crescent v0.2.1-rc2, Installer script is version 1.2.1.\n\nProgram and scripts written by BurningInfern0." --width="700" --height="500" --checklist --column="Check" --column="Script" --column="Description" --column="Version" --column="External" \
     false ForkBombs "Prevents fork bombs." 1.1 "" \
     false RKHunter "Performs a rootkit scan with RootkitHunter." 1.0 "rkhunter" \
     false BPF "Enables the Berkely Packet Finder." 1.0 "" \
@@ -19,7 +19,8 @@ if [[ $1 == "-g" ]]; then
     false DisRoot "Disables root access via tty." 1.0 "" \
     false DisSSHRoot "Disables root access via SSH." 1.0 "openssh-server" \
     false DisGuest "Disables the guest account in Debian/Ubuntu systems." 1.0 "" \
-    false HideProcID "Hides account process IDs via /etc/fstab." 1.0 "")
+    false Cron "Gathers information about currently installed crontabs." 1.0 "" \
+    false Symlinks "Removes broken symlinks." 1.0 "symlinks")
 
   # puts yad items into array
   IFS="|" read -ra scriptItems <<< "$scriptOptions"
@@ -58,6 +59,12 @@ if [[ $1 == "-g" ]]; then
         ;;
       HideProcID)
         ./scripts/hideprocid.sh
+        ;;
+      Cron)
+        ./scripts/cron.sh
+        ;;
+      Symlinks)
+        ./scripts/symlinks.sh
         ;;
     esac
   done

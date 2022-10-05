@@ -1,7 +1,7 @@
 #!/bin/bash
 # installer script for installing stuff.
-# version 1.2
-# - general improvements
+# version 1.2.1
+# - updated error detection
 
 if [[ -n "$1" ]]; then
   echo ""
@@ -39,23 +39,44 @@ fi
 # installs the package using the given package manager.
 case $pkgman in
   yum)
-     echo "Installing $1 via yum..."
-     yum -y install $1
+    echo "Installing $1 via yum..."
+    yum -y install $1
+    exitCode=$(echo $?)
+    if [[ $exitCode != "0" ]]; then
+      exit 1
+    fi
     ;;
   dnf)
     echo "Installing $1 via dnf..."
     dnf install --assumeyes $1
+    exitCode=$(echo $?)
+    if [[ $exitCode != "0" ]]; then
+      exit 1
+    fi
     ;;
   zypper)
     echo "Installing $1 via zypper..."
     zypper --no-confirmation install $1
+    exitCode=$(echo $?)
+    if [[ $exitCode != "0" ]]; then
+      exit 1
+    fi
     ;;
   pacman)
     echo "Installing $1 via pacman..."
     pacman -S --noconfirm $1
+    exitCode=$(echo $?)
+    if [[ $exitCode != "0" ]]; then
+      exit 1
+    fi
     ;;
   apt)
     echo "Installing $1 via apt..."
     apt -y install $1
+    exitCode=$(echo $?)
+    if [[ $exitCode != "0" ]]; then
+      exit 1
+    fi
     ;;
 esac 
+
