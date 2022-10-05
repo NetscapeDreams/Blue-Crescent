@@ -21,7 +21,7 @@ If the program is not installed, Blue Crescent will install it for you, but only
 
 If the program is already installed, Blue Crescent will simply skip the installer script.
 
-## Version History
+## Changelog
 Version 0.2.1:
 - Changed name
 - Swapped `zenity` to `yad`
