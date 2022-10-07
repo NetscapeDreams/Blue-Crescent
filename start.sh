@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [[ $1 == "-g" ]]; then
-  yad --splash --center --image="./assets/bcsplash.png" --no-buttons --width=800 --height=500
+  yad --splash --center --image="./assets/bcsplash.png" --no-buttons --width=800 --height=500 --timeout=2
   curUser=$(whoami)
   if [[ $curUser != "root" ]]; then
     yad --title="Blue Crescent | Root Warning" --window-icon="./assets/bcicon.png" --width=500 --text="This script has not been run as root. Non-root mode should only be used for development or debugging purposes only."
