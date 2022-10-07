@@ -1,14 +1,15 @@
 #!/bin/bash
 
 if [[ $1 == "-g" ]]; then
+  yad --splash --center --image="./assets/bcsplash.png" --no-buttons --width=800 --height=500
   curUser=$(whoami)
   if [[ $curUser != "root" ]]; then
-    yad --title="Blue Crescent | Root Warning" --window-icon="bcicon.png" --width=500 --text="This script has not been run as root. Non-root mode should only be used for development or debugging purposes only."
+    yad --title="Blue Crescent | Root Warning" --window-icon="./assets/bcicon.png" --width=500 --text="This script has not been run as root. Non-root mode should only be used for development or debugging purposes only."
     if [[ $? == "1" ]]; then
       exit
     fi
   fi
-  scriptOptions=$(yad --list --center --window-icon="bcicon.png" --image="bc.png" --image-on-top --title="Blue Crescent Graphical" --text="Please select what you want to do.\n\nBlue Crescent v0.2.1-rc2, Installer script is version 1.2.1.\n\nProgram and scripts written by BurningInfern0." --width="700" --height="500" --checklist --column="Check" --column="Script" --column="Description" --column="Version" --column="External" \
+  scriptOptions=$(yad --list --center --window-icon="./assets/bcicon.png" --image="./assets/bc.png" --image-on-top --title="Blue Crescent Graphical" --text="Please select what you want to do.\n\nBlue Crescent v0.2.1-rc3, Installer script is version 1.2.1.\n\nProgram and scripts written by BurningInfern0." --width="700" --height="500" --checklist --column="Check" --column="Script" --column="Description" --column="Version" --column="External" \
     false ForkBombs "Prevents fork bombs." 1.1 "" \
     false RKHunter "Performs a rootkit scan with RootkitHunter." 1.0 "rkhunter" \
     false BPF "Enables the Berkely Packet Finder." 1.0 "" \

@@ -1,6 +1,6 @@
 ![bc](https://user-images.githubusercontent.com/74492478/187731754-384da0ec-b559-4691-a2fd-35c6e4ee6bc8.png)
 
-Blue Crescent version 0.2.1 Release Candidate 2, Written by BurningInfern0
+Blue Crescent version 0.2.1 Release Candidate 3, Written by BurningInfern0
 
 Linux hardening script.
 
@@ -30,3 +30,4 @@ Version 0.2.1:
 - Added 2 new scripts:
   - cron.sh
   - symlinks.sh
+- Added splash screen on startup.
