@@ -9,7 +9,7 @@ if [[ $1 == "-g" ]]; then
       exit
     fi
   fi
-  scriptOptions=$(yad --list --center --window-icon="./assets/bcicon.png" --image="./assets/bc.png" --image-on-top --title="Blue Crescent Graphical" --text="Please select what you want to do.\n\nBlue Crescent v0.2.1-rc3, Installer script is version 1.2.1.\n\nProgram and scripts written by BurningInfern0." --width="700" --height="500" --checklist --column="Check" --column="Script" --column="Description" --column="Version" --column="External" \
+  scriptOptions=$(yad --list --print-column=2 --center --window-icon="./assets/bcicon.png" --image="./assets/bc.png" --image-on-top --title="Blue Crescent Graphical" --text="Please select what you want to do.\n\nBlue Crescent v0.2.1-rc3, Installer script is version 1.2.1.\n\nProgram and scripts written by BurningInfern0." --width="700" --height="500" --checklist --column="Check" --column="Script" --column="Description" --column="Version" --column="External" \
     false ForkBombs "Prevents fork bombs." 1.1 "" \
     false RKHunter "Performs a rootkit scan with RootkitHunter." 1.0 "rkhunter" \
     false BPF "Enables the Berkely Packet Finder." 1.0 "" \
@@ -24,9 +24,13 @@ if [[ $1 == "-g" ]]; then
     false Symlinks "Removes broken symlinks." 1.0 "symlinks")
 
   # puts yad items into array
-  IFS="|" read -ra scriptItems <<< "$scriptOptions"
+  # counts how many items
+  itemString=$(echo $scriptOptions | sed 's/|//g')
 
-  for script in ${scriptItems[@]}; do
+  # puts the items into an array
+  IFS=' ' read -r -a itemArray <<< "$itemString"
+
+  for script in ${itemArray[@]}; do
     case $script in
       ForkBombs)
         ./scripts/forkbombs.sh
