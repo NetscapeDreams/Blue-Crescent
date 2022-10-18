@@ -24,7 +24,7 @@ if [[ $1 == "-g" ]]; then
     false Symlinks "Removes broken symlinks." 1.0 "symlinks")
 
   # puts yad items into array
-  # counts how many items
+  # cleans item string
   itemString=$(echo $scriptOptions | sed 's/|//g')
 
   # puts the items into an array
